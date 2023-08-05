@@ -45,7 +45,7 @@ class Folder:
         folder.create()
         self.subfolders.add(folder)
 
-    def list_tree(self, depth=0) -> str:
+    def list_tree(self, depth: int = 0) -> str:
         result = '  ' * depth + '* ' + self.path.name + '\n'
         result += ''.join('  ' * (depth + 1) + '- ' + file.path.name + '\n' for file in self.files)
         result += ''.join(folder.list_tree(depth + 1) for folder in self.subfolders)
