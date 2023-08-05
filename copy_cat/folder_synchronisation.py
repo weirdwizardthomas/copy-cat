@@ -16,6 +16,7 @@ def start_synchronisation(interval: float, source: Folder, replica_root: Path) -
     scheduler = sched.scheduler(time.time, time.sleep)
 
     def periodic_function() -> None:
+        logger.info(f'Synchronising folder {source.path} to replica {replica_root}.')
         source.synchronize(replica_root=replica_root)
         scheduler.enter(interval, 1, periodic_function)
 
