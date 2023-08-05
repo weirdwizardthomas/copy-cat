@@ -53,6 +53,10 @@ class Folder:
 
     # todo sync with filesystem ?
     def synchronize(self, replica_root: Path) -> None:
+        replica_folder = replica_root.joinpath(*self.path.parts[1:])
+        if not replica_folder.exists():
+            replica_folder.mkdir(parents=True)
+
         for index, file in enumerate(self.files):
             replica = Folder._get_replica_path(replica_root=replica_root, source=file.path)
             replica_checksum = checksum(replica)
